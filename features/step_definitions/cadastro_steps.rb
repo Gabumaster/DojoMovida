@@ -41,7 +41,16 @@ end
 
 Então("devo logar no site com os dados criados") do
   find('button[id="btnEnviaDados"]').click
-  sleep 15
-  find('div[class="alert alert-warning"]')
-  puts 'Cadastro efetuado com sucesso.'
- end
+  $wait.until {has_css?('div[class="alert alert-warning"]')}
+  # binding.pry
+  # $wait.until { find('div[class="alert alert-warning"]') }
+  # $wait.until (By.xpath, '(//div[@class="alert alert-warning"])')
+  i = find('div[class="alert alert-warning"]').text[0..29]
+  puts find('div[class="alert alert-warning"]').text if expect(i).to eq("Cadastro efetuado com sucesso.")
+end
+
+#   sleep 30
+#   find('div[class="alert alert-warning"]').text
+#   puts 'Cadastro efetuado com sucesso.'
+
+ 

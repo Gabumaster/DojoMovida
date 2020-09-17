@@ -3,6 +3,13 @@ require 'capybara/cucumber'
 require 'pry'
 require 'faker'
 require 'cpf_faker'
+require 'site_prism'
+require 'selenium-webdriver'
+require 'rspec'
+require 'httparty'
+
+
+$wait = Selenium::WebDriver::Wait.new :timeout => 60
 
 Capybara.configure do |config|
     config.default_driver = :selenium
