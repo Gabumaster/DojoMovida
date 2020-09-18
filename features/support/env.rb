@@ -8,15 +8,20 @@ require 'selenium-webdriver'
 require 'rspec'
 require 'httparty'
 
-
-$wait = Selenium::WebDriver::Wait.new :timeout => 60
-
-Capybara.configure do |config|
-    config.default_driver = :selenium
-    Capybara.page.driver.browser.manage.window.maximize
-    
-end
+$wait = Selenium::WebDriver::Wait.new :timeout => 30
 
 
-# objeto default_driver => testar no chrome = :selenium_chrome or testar no mozilla = :selenium
-# iniciar navegador em segundo plano config.default_driver = :selenium_chrome_headless
+#configurando o driver Capybara
+Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, :browser => :firefox)
+  end
+  
+  #Setando a configuraão do driver como padrão
+  Capybara.default_driver = :selenium
+  
+  #Time padrão na execução
+  Capybara.default_max_wait_time = 30
+  
+  #Maximizar a tela ao iniciar os testes
+  Capybara.page.driver.browser.manage.window.maximize
+
